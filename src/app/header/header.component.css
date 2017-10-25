@@ -1,0 +1,7 @@
+.navbar {
+  background-color: transparent;
+  margin-bottom: .5em;
+  border-bottom: 1px solid gray;
+  padding: .3em .5em;
+  z-index: 1;
+}

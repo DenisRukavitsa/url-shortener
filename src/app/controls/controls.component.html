@@ -1,0 +1,33 @@
+<!--If short code is passed in URL-->
+<div *ngIf="redirecting">
+  Redirecting...
+</div>
+
+<div class="wrapper" *ngIf="!redirecting">
+  <form class="form" [formGroup]="form">
+
+    <!--URL control-->
+    <label for="email">URL:</label>
+    <input type="url" class="form-control" id="email"
+           placeholder="http://example.com" [ngClass]="{'is-invalid': urlControl.invalid}"
+           [formControl]="urlControl">
+
+    <!--Password control-->
+    <label for="password">Short code:</label>
+    <input type="text" class="form-control" id="password"
+           [ngClass]="{'is-invalid': shortCodeControl.invalid}" [formControl]="shortCodeControl">
+
+    <!--Error and success alerts-->
+    <div *ngIf="error" class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+    <div *ngIf="shortenedUrl" class="alert alert-success" role="alert">
+      Done! Your shortened URL:<br><span class="shortenedUrl">{{shortenedUrl}}</span>
+    </div>
+
+    <!--Generate button-->
+    <button class="btn btn-primary" (click)="generate()">
+      Generate <img *ngIf="buttonLoading" src="../../assets/images/button_loading.svg">
+    </button>
+  </form>
+</div>
