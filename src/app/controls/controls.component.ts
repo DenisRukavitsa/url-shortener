@@ -50,8 +50,8 @@ export class ControlsComponent implements OnInit {
           window.location.replace(value);
         } else {
           this.redirecting = false;
-          alert(`Oops!.. There is no associated URL to the short code "${this.route}" you provided.
-                 But you can create the association right now.`);
+          alert('Oops!.. There is no associated URL to the short code "' + this.route +
+                '" you provided. But you can create the association right now.');
         }
       });
     }
@@ -67,12 +67,19 @@ export class ControlsComponent implements OnInit {
   }
 
   private checkInputs(url: string, shortCode: string) {
+    // attaching HTTP protocol to the URL if protocol is not provided
+    if (!url.toLowerCase().startsWith('http://') && !url.toLowerCase().startsWith('https://')) {
+      url = 'http://' + url;
+      console.log(url);
+    }
+
     // client-side validations for URL
     if (!url) {
       this.showError(this.urlControl, 'Please provide the URL first');
       return;
     }
-    if (!new RegExp('^(https?:\\/\\/)([\\w\\.]+)\\.([a-z]{2,6}\\.?)(\\/[\\w\\.]*)*\\/?$').test(url)) {
+    if (!new RegExp(`\\(?(?:(http|https|ftp):\\/\\/)?(?:((?:[^\\W\\s]|\\.|-|[:]{1})+)@{1})?((?:www.)?(?:[^\\W\\s]|\\.|-)+[\\.][^\\W\\s]{2,4}|localhost(?=\\/)|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(?::(\\d*))?([\\/]?[^\\s\\?]*[\\/]{1})*(?:\\/?([^\\s\\n\\?\\[\\]\\{\\}\\#]*(?:(?=\\.)){1}|[^\\s\\n\\?\\[\\]\\{\\}\\.\\#]*)?([\\.]{1}[^\\s\\?\\#]*)?)?(?:\\?{1}([^\\s\\n\\#\\[\\]]*))?([\\#][^\\s\\n]*)?\\)?`)
+        .test(url)) {
       this.showError(this.urlControl, 'URL is not correct. Please use the format http://example.com');
       return;
     }
