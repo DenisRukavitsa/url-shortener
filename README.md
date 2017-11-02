@@ -1,6 +1,14 @@
 # UrlShortener
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
+This project is generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.2.
+
+Application has a field where user can put valid url.
+Application then generates short url.
+User also can enter desired short url in another field.
+Application validates if requested short url is not in use yet.
+Application stores original and short url pair in Firebase DB. User can share short url with other users and once they try to access short url they are redirected to the original url.
+
+## Hosting
 
 App is hosted here https://url-shortener-10d44.firebaseapp.com/
 
